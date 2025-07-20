@@ -1,4 +1,4 @@
-import { useApi } from "#imports";
+import { useApi, useLang } from "#imports";
 import { useDateFormat } from "@vueuse/core";
 
 import type { IItem } from "@suku-kahanamoku/common-module/types";
