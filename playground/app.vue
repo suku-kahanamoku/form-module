@@ -1,8 +1,10 @@
 <template>
-  <div>
-    Nuxt module playground!
-  </div>
+  <UApp :locale="'cs'">
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
+    <CmpCookieBanner />
+  </UApp>
 </template>
 
-<script setup>
-</script>
+<script setup></script>
