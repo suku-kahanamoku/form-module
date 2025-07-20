@@ -105,7 +105,7 @@ async function onSubmit(body: Record<string, any>) {
               class="ms-auto"
               type="submit"
               :loading="loading"
-              >{{ $tt("$.form.submit") }}</UButton
+              >{{ $tt("$.btn.submit") }}</UButton
             >
           </template>
         </CmpForm>
