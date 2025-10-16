@@ -71,18 +71,6 @@ export default defineNuxtModule<ModuleOptions>({
       langDir: resolve("./runtime/assets/locales"),
     });
 
-    // Konfigurace TailwindCSS pro runtime komponenty
-    nuxtOpt.tailwindcss = defu(nuxtOpt.tailwindcss || {}, {
-      config: {
-        content: [
-          resolve("./runtime/components/**/*.{vue,mjs,js,ts}"),
-          resolve("./runtime/layouts/**/*.{vue,mjs,js,ts}"),
-          resolve("./runtime/pages/**/*.{vue,mjs,js,ts}"),
-          resolve("./runtime/*.{mjs,js,ts}"),
-        ],
-      },
-    });
-
     // Přidání runtime komponent
     addComponentsDir({
       path: resolve("./runtime/components"),
