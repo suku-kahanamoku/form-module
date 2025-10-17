@@ -54,22 +54,6 @@ export default defineNuxtModule<ModuleOptions>({
    */
   async setup(_options, _nuxt) {
     const { resolve } = createResolver(import.meta.url);
-    const nuxtOpt = _nuxt.options as any;
-
-    // Konfigurace pro lang-module
-    nuxtOpt.langModule = defu(nuxtOpt.langModule || {}, {
-      locales: [
-        {
-          code: "en",
-          file: resolve("./runtime/assets/locales/en.json"),
-        },
-        {
-          code: "cs",
-          file: resolve("./runtime/assets/locales/cs.json"),
-        },
-      ],
-      langDir: resolve("./runtime/assets/locales"),
-    });
 
     // Přidání runtime komponent
     addComponentsDir({
@@ -111,5 +95,21 @@ export default defineNuxtModule<ModuleOptions>({
     if (!hasNuxtModule("@pinia/nuxt")) {
       await installModule("@pinia/nuxt");
     }
+
+    _nuxt.hook("i18n:registerModule", (register) => {
+      register({
+        langDir: resolve("./runtime/assets/locales"),
+        locales: [
+          {
+            code: "en",
+            file: "en.json",
+          },
+          {
+            code: "cs",
+            file: "cs.json",
+          },
+        ],
+      });
+    });
   },
 });
