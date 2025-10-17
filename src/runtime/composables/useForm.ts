@@ -312,12 +312,12 @@ export function useForm() {
           value = decodeURI(value)
             .toString()
             .replaceAll(/[.*+?^${}()|[\]]/g, "\\\\$&");
-          value = value.replaceAll(/[\\]/g, "\\\$&");
+          value = value.replaceAll(/[\\]/g, "\\$&");
         }
         //
         else if (field.operator?.value === "$raw") {
           // Decode URI protoze field.value muze prijit z url
-          value = decodeURI(value).toString().replaceAll(/[\\]/g, "\\\$&");
+          value = decodeURI(value).toString().replaceAll(/[\\]/g, "\\$&");
         }
 
         // Vytvori field name
