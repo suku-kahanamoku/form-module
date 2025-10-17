@@ -1,6 +1,7 @@
 {
   "$": {
     "btn": {
+      "submit": "Odeslat",
       "reset": "Resetovat",
       "cancel": "Zrušit",
       "back": "Zpět",
@@ -46,7 +47,6 @@
       "change_operator": "Změnit operátora."
     },
     "form": {
-      "submit": "Odeslat",
       "email": "E-mail",
       "password": "Heslo",
       "select": "Vybrat"

@@ -1,6 +1,7 @@
 {
   "$": {
     "btn": {
+      "submit": "Submit",
       "reset": "Reset",
       "cancel": "Cancel",
       "back": "Back",
@@ -46,7 +47,6 @@
       "change_operator": "Change operator."
     },
     "form": {
-      "submit": "Submit",
       "email": "E-mail",
       "password": "Password",
       "select": "Select"
