@@ -1,12 +1,15 @@
 import {
+  IS_DEFINED,
+  IS_OBJECT,
+  IS_OBJECT_ID,
+} from "@suku-kahanamoku/common-module/utils";
+import {
   ITERATE,
   GET_OBJECT_PARAM,
-  IS_OBJECT,
   DIFFERENCE,
   TRIM,
-  IS_OBJECT_ID,
-  IS_DEFINED,
 } from "@suku-kahanamoku/common-module/utils";
+
 import type { IFormField } from "../types/field.interface";
 
 export function useForm() {
@@ -30,9 +33,7 @@ export function useForm() {
       if (field?.ignore) return;
 
       // If the field is an object array, construct accordingly
-      let parsedValue = field?.isObjectArray
-        ? _getValue(value, field)
-        : _getValue(value, field);
+      let parsedValue = _getValue(value, field);
 
       // Pokud existuje model, porovna hodnotu z daneho atributu s novou hodnotou
       if (model) {
@@ -307,7 +308,16 @@ export function useForm() {
         let value = _getValue(field.value, field);
         // Pokud je to regexova hodnota, musi se escapovat tecky
         if (["$start", "$regex"].includes(field.operator?.value || "")) {
-          value = value.toString().replaceAll(/[.*+?^${}()|[\]\\]/g, "\\\\$&");
+          // Decode URI protoze field.value muze prijit z url
+          value = decodeURI(value)
+            .toString()
+            .replaceAll(/[.*+?^${}()|[\]]/g, "\\\\$&");
+          value = value.replaceAll(/[\\]/g, "\\$&");
+        }
+        //
+        else if (field.operator?.value === "$raw") {
+          // Decode URI protoze field.value muze prijit z url
+          value = decodeURI(value).toString().replaceAll(/[\\]/g, "\\$&");
         }
 
         // Vytvori field name
@@ -500,6 +510,8 @@ export function useForm() {
     switch (operator) {
       case "$regex":
         return `${fieldName}:{"$regex":"${value}","$options":"i"},`;
+      case "$raw":
+        return `${fieldName}:{"$regex":"${value}"},`;
       case "$ne":
         return `${fieldName}:{"$not":{"$regex":"${value}","$options":"i"}},`;
       default:
