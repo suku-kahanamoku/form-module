@@ -1,10 +1,6 @@
 {
   "name": "@suku-kahanamoku/form-module",
-<<<<<<< HEAD
-  "version": "1.0.5",
-=======
   "version": "1.0.7",
->>>>>>> c135b3053493e1537eb85cddb81fa67eec8dd70b
   "description": "Form module",
   "repository": {
     "type": "git",
