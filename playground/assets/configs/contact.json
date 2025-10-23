@@ -11,6 +11,20 @@
       "value": ""
     },
     {
+      "name": "category",
+      "type": "select",
+      "label": "$.form.category",
+      "placeholder": "john@doe.com",
+      "multiple": true,
+      "required": true,
+      "clearable": true,
+      "options": [
+        { "label": "$.form.category", "value": "category" },
+        { "label": "$.form.email", "value": "email" }
+      ],
+      "value": ""
+    },
+    {
       "name": "message",
       "type": "textarea",
       "label": "$.form.msg",

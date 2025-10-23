@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
-import { useApi, onMounted, type Ref } from "#imports";
+import { useApi, onMounted, type Ref, useLang } from "#imports";
 
 import type { IItem } from "@suku-kahanamoku/common-module/types";
 import { GET_OBJECT_PARAM } from "@suku-kahanamoku/common-module/utils";
@@ -38,6 +38,7 @@ const emits = defineEmits<{
   ): void;
 }>();
 
+const { t } = useLang();
 // Helper funkce pro field
 const {
   compare,
@@ -67,7 +68,9 @@ const model = defineModel<any>({
 
 // Options pro selectbox
 const options: Ref<IFormFieldOption[]> = ref(
-  transformToOption(props.field.options || []) as IFormFieldOption[]
+  (transformToOption(props.field.options || []) as IFormFieldOption[]).map(
+    (o) => ({ ...o, label: t(o.label) })
+  )
 );
 
 // Priznak, zda probiha load
@@ -85,13 +88,6 @@ const isDifferent = computed(
 );
 
 const open = ref();
-
-// Pokud se klikne na clear button, tak se smaze hodnota a provede se focus
-const onClear = () => {
-  model.value = props.field.multiple ? [] : "";
-  el.value.input?.focus();
-  emits("clear", props.field, options.value);
-};
 
 /**
  * Dle hledaneho vyrazu zavola jednotlive api
@@ -143,48 +139,6 @@ async function loadOptions(): Promise<void> {
   }
 }
 
-/**
- * Pokud se vybere nejaka hodnota ze seznamu options
- **/
-function onChange(value: any) {
-  setTimeout(() => emits("select", value, props.field, options.value));
-}
-
-/**
- * Pokud se klikne na ten samy option, tak to vyresetuje model
- */
-function onClick(event: MouseEvent | PointerEvent, value: any) {
-  if (model.value === value) {
-    event.preventDefault();
-    setTimeout(() =>
-      emits("select", (model.value = ""), props.field, options.value)
-    );
-  }
-}
-
-/**
- * Pokud se odstrani badge
- */
-function onRemove(value: any) {
-  model.value = model.value.filter((i: any) => i !== value);
-  emits("remove", value, props.field, options.value);
-}
-
-/**
- * Pokud se klikne na badge
- *
- * @param value
- * @param field
- * @param options
- */
-function onClickBadge(
-  value: any,
-  field: IFormFieldSelect,
-  options: IFormFieldOption[]
-) {
-  emits("click:badge", value, field, options);
-}
-
 onMounted(loadOptions);
 </script>
 
@@ -195,7 +149,7 @@ onMounted(loadOptions);
     :description="$tt(field.description!)"
     :hint="$tt(field.hint!)"
     :help="$tt(field.help!)"
-    :size="field.size || 'md'"
+    :size="field.size || 'xl'"
     :required="field.required"
     :ui="ui"
   >
@@ -230,20 +184,14 @@ onMounted(loadOptions);
       v-model:open="open"
       :items="options"
       :multiple="field.multiple"
+      :size="field.size || 'xl'"
+      :placeholder="field.placeholder || '$.form.select'"
       :trailingIcon="
         open ? 'i-heroicons-chevron-down' : 'i-heroicons-chevron-right'
       "
       class="w-full"
+      :class="{ 'field-warning': isDifferent }"
     >
-      <CmpSelectFieldLabel
-        v-model="model"
-        :field="field"
-        :options="options"
-        :onRemove="onRemove"
-        :onClear="onClear"
-        @click="onClickBadge"
-      />
-
       <template #item-label="{ item }">
         {{ $tt(item.label) }}
       </template>

@@ -86,7 +86,7 @@ onMounted(async () => {
     :description="$tt(field.description!)"
     :hint="$tt(field.hint!)"
     :help="$tt(field.help!)"
-    :size="field.size || 'md'"
+    :size="field.size || 'xl'"
     :required="field.required"
     :ui="ui"
   >
@@ -125,7 +125,7 @@ onMounted(async () => {
         :items="options"
         :optionAttribute="field.optionAttribute || 'label'"
         :valueAttribute="field.valueAttribute || 'value'"
-        :size="field.size || 'md'"
+        :size="field.size || 'xl'"
         :uiRadio="{ label: error && 'text-red-500' }"
         :autofocus="field.autofocus"
         :class="{ 'field-warning': isDifferent }"

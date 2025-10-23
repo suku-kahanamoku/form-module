@@ -48,7 +48,7 @@ const isDifferent = computed(() => {
     :description="$tt(field.description!)"
     :hint="$tt(field.hint!)"
     :help="$tt(field.help!)"
-    :size="field.size || 'md'"
+    :size="field.size || 'xl'"
     :required="field.required"
     :ui="ui"
   >

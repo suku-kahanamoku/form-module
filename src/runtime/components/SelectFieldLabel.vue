@@ -1,38 +1,33 @@
 <script setup lang="ts">
 import { computed } from "vue";
 
-import type { IFormFieldOption, IFormFieldSelect } from "../types";
+import type { IFormFieldSelect } from "../types";
 
 // Definice props
 const props = defineProps<{
   field: IFormFieldSelect;
-  options: IFormFieldOption[];
   onRemove: (...args: any) => void;
   onClear: (...args: any) => void;
 }>();
 
 // Definice emit eventu submit
 const emits = defineEmits<{
-  (
-    e: "click",
-    value: any,
-    field: IFormFieldSelect,
-    options: IFormFieldOption[]
-  ): void;
+  (e: "click", value: any, field: IFormFieldSelect): void;
+  (e: "remove", value: any, field: IFormFieldSelect): void;
 }>();
 
 const model = defineModel();
 
 const option = computed(() =>
   Array.isArray(model.value)
-    ? model.value?.map((val) => props.options?.find((opt) => opt.value === val))
-    : props.options?.find((opt) => opt.value === model.value)
+    ? model.value?.map((val) => val.item)
+    : model.value?.item
 );
 </script>
 
 <template>
   <div
-    class="w-full flex justify-between py-2"
+    class="w-full flex justify-between"
     :class="{ 'cursor-text': field.variant === 'none' }"
   >
     <!-- pokud je to multiple, tak zobrazi badge komponenty s event chip ikonami -->
@@ -40,12 +35,16 @@ const option = computed(() =>
       <!-- pokud ma nejakou hodnotu -->
       <div v-if="option.length" class="flex flex-wrap gap-2 -mb-1">
         <template v-for="opt in option">
-          <UChip size="xl" color="error">
+          <UChip
+            size="xl"
+            color="error"
+            @click.prevent.stop="emits('remove', opt?.value, field)"
+          >
             <CmpTooltip v-if="opt?.item?.tooltip">
               <UBadge
                 :label="$tt(opt?.label!)"
                 rounded
-                @click.prevent="emits('click', opt.value, field, options)"
+                @click.prevent="emits('click', opt.value, field)"
               />
 
               <template #text>
@@ -56,7 +55,7 @@ const option = computed(() =>
               v-else
               :label="$tt(opt?.label!)"
               rounded
-              @click.prevent="emits('click', opt?.value, field, options)"
+              @click.prevent="emits('click', opt?.value, field)"
             />
 
             <template #content>
