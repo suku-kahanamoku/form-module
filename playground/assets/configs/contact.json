@@ -11,11 +11,50 @@
       "value": ""
     },
     {
+      "name": "appointment_date",
+      "type": "datetime",
+      "label": "Termín schůzky",
+      "placeholder": "Vyberte datum schůzky",
+      "required": false,
+      "clearable": true,
+      "format": "DD.MM.YYYY",
+      "value": ""
+    },
+    {
       "name": "category",
       "type": "select",
       "label": "$.form.category",
-      "placeholder": "john@doe.com",
+      "placeholder": "$.form.category_placeholder",
       "multiple": true,
+      "required": true,
+      "clearable": true,
+      "options": [
+        { "label": "$.form.category", "value": "category" },
+        { "label": "$.form.email", "value": "email" }
+      ],
+      "value": ""
+    },
+    {
+      "name": "checkbox",
+      "type": "checkbox",
+      "label": "$.form.checkbox",
+      "required": true,
+      "clearable": true,
+      "value": ""
+    },
+    {
+      "name": "file",
+      "type": "file",
+      "label": "$.form.file",
+      "required": true,
+      "clearable": true,
+      "value": ""
+    },
+    {
+      "name": "radio",
+      "type": "radio",
+      "label": "$.form.radio",
+      "placeholder": "$.form.radio",
       "required": true,
       "clearable": true,
       "options": [

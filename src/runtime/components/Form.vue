@@ -17,6 +17,7 @@ import type { IBtn } from "@suku-kahanamoku/ui-module/types";
 
 import type { IFormField, IFormFieldOption } from "../types/field.interface";
 import { useZod } from "../composables/useZod";
+import type { footer } from "#build/ui";
 
 // Definice props
 const props = defineProps<{
@@ -137,7 +138,10 @@ defineExpose({ form, model, schema, onChange });
       @submit.prevent="onSubmit"
       @change="emits('change', model, $event)"
     >
-      <UCard :variant="variant" :ui="ui">
+      <UCard
+        :variant="variant || 'subtle'"
+        :ui="defu(ui, { body: 'space-y-4', footer: 'flex justify-between' })"
+      >
         <template v-if="$slots.header" #header>
           <slot name="header" />
         </template>
@@ -188,7 +192,7 @@ defineExpose({ form, model, schema, onChange });
               :to="localePath(actions?.no?.link!)"
               type="button"
               :color="actions?.no?.color"
-              :variant="actions?.no?.variant"
+              :variant="actions?.no?.variant || 'outline'"
               :size="actions?.no?.size"
               :icon="actions?.no?.icon"
               @click="actions?.no?.link ? undefined : emits('cancel', model)"
@@ -202,7 +206,7 @@ defineExpose({ form, model, schema, onChange });
               :to="localePath(actions?.yes?.link!)"
               type="button"
               :color="actions?.yes?.color || color"
-              :variant="actions?.yes?.variant || 'solid'"
+              :variant="actions?.yes?.variant"
               :size="actions?.yes?.size"
               :icon="actions?.yes?.icon"
               :loading="loading"
@@ -214,7 +218,7 @@ defineExpose({ form, model, schema, onChange });
               data-testid="form-submit"
               type="submit"
               :color="actions?.yes?.color || color"
-              :variant="actions?.yes?.variant || 'solid'"
+              :variant="actions?.yes?.variant"
               :size="actions?.yes?.size"
               :icon="actions?.yes?.icon"
               :disabled="
