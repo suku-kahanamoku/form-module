@@ -15,7 +15,7 @@
       "type": "datetime",
       "label": "Termín schůzky",
       "placeholder": "Vyberte datum schůzky",
-      "required": false,
+      "required": true,
       "clearable": true,
       "format": "DD.MM.YYYY",
       "value": ""

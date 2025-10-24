@@ -76,10 +76,8 @@ export function useUrlResolver() {
       const query = getRestUrlFieldsPayload(config.fields);
 
       // url, kde query je vytvorene z fields...value
-      const newUrl = new URL(
-        query ? path + GET_MARK(path) + `q={${query}}` : path,
-        location
-      );
+      const newUrl = new URL(path, location);
+      newUrl.searchParams.set("q", `{${query}}`);
       const newQuery = JSON.parse(newUrl.searchParams.get("q") || "{}");
 
       // puvodni restUrl, ktere je v config.restUrl

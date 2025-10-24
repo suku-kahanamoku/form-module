@@ -194,54 +194,56 @@ onMounted(() => {
     </template>
 
     <!-- Date Picker Input -->
-    <UPopover>
-      <UButton
-        color="neutral"
-        variant="outline"
-        icon="i-heroicons-calendar-days"
-        :trailing-icon="
-          open ? 'i-heroicons-chevron-down' : 'i-heroicons-chevron-right'
-        "
-        :disabled="field.disabled"
-        :size="field.size || 'xl'"
-        class="w-full justify-between"
-        :class="{ 'field-warning': isDifferent }"
-        @click="open = !open"
-      >
-        <span class="truncate">{{ displayValue }}</span>
-      </UButton>
+    <template #default="{ error }">
+      <UPopover>
+        <UButton
+          :color="error ? 'error' : field.color || 'neutral'"
+          variant="outline"
+          icon="i-heroicons-calendar-days"
+          :trailing-icon="
+            open ? 'i-heroicons-chevron-down' : 'i-heroicons-chevron-right'
+          "
+          :disabled="field.disabled"
+          :size="field.size || 'xl'"
+          class="w-full justify-between"
+          :class="{ 'field-warning': isDifferent }"
+          @click="open = !open"
+        >
+          <span class="truncate">{{ displayValue }}</span>
+        </UButton>
 
-      <template #content>
-        <div class="p-4">
-          <UCalendar
-            v-model="calendarModel"
-            :color="field.color || 'primary'"
-            :variant="field.variant || 'solid'"
-            :size="field.size || 'md'"
-            :disabled="field.disabled"
-            :readonly="field.readonly"
-            :min-value="minValue"
-            :max-value="maxValue"
-            class="w-full"
-          />
+        <template #content>
+          <div class="p-4">
+            <UCalendar
+              v-model="calendarModel"
+              :color="field.color || 'primary'"
+              :variant="field.variant || 'solid'"
+              :size="field.size || 'md'"
+              :disabled="field.disabled"
+              :readonly="field.readonly"
+              :min-value="minValue"
+              :max-value="maxValue"
+              class="w-full"
+            />
 
-          <!-- Clear button -->
-          <div
-            v-if="calendarModel && !field.required"
-            class="flex justify-end mt-4 pt-4 border-t border-gray-200"
-          >
-            <UButton
-              color="error"
-              variant="soft"
-              size="sm"
-              icon="i-heroicons-x-mark"
-              @click="onClear"
+            <!-- Clear button -->
+            <div
+              v-if="calendarModel && !field.required"
+              class="flex justify-end mt-4 pt-4 border-t border-gray-200"
             >
-              {{ t("$.btn.delete") }}
-            </UButton>
+              <UButton
+                color="error"
+                variant="soft"
+                size="sm"
+                icon="i-heroicons-x-mark"
+                @click="onClear"
+              >
+                {{ t("$.btn.delete") }}
+              </UButton>
+            </div>
           </div>
-        </div>
-      </template>
-    </UPopover>
+        </template>
+      </UPopover>
+    </template>
   </UFormField>
 </template>
