@@ -64,6 +64,7 @@ describe("useOperator composable", () => {
         "$ne",
         "$null",
         "$not_null",
+        "$raw",
       ]);
     });
 
