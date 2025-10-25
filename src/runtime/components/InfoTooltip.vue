@@ -34,7 +34,7 @@ async function onCopy() {
 </script>
 
 <template>
-  <CmpTooltip>
+  <UTooltip>
     <UButton
       data-testid="info-btn"
       icon="i-heroicons-information-circle"
@@ -56,5 +56,5 @@ async function onCopy() {
         </div>
       </div>
     </template>
-  </CmpTooltip>
+  </UTooltip>
 </template>

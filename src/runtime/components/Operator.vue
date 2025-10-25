@@ -27,12 +27,14 @@ const operators = computed(() => [
 ]);
 
 // Model pro hodnotu textoveho pole
-const model = defineModel<string>({ get: (val) => val || opers.value[0] });
+const model = defineModel<string>({
+  get: (val) => val || opers.value[0] || "",
+});
 </script>
 
 <template>
   <UDropdown v-model="model" :items="operators" :padded="false">
-    <CmpTooltip>
+    <UTooltip>
       <UButton
         :data-testid="`${field.type || 'text'}-${field.name}-toggle-operator`"
         variant="ghost"
@@ -46,16 +48,16 @@ const model = defineModel<string>({ get: (val) => val || opers.value[0] });
       </UButton>
 
       <template #text>{{ $tt("$.info.change_operator") }}</template>
-    </CmpTooltip>
+    </UTooltip>
 
     <template #item="{ item }">
-      <CmpTooltip>
+      <UTooltip>
         {{ item.label }}
 
         <template #text>
           {{ $tt("$.operator.tooltip." + item.value) }}
         </template>
-      </CmpTooltip>
+      </UTooltip>
     </template>
   </UDropdown>
 </template>

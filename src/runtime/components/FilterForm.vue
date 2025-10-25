@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { UTooltip } from "#components";
 import { ref, reactive, useOperator } from "#imports";
 import type { DropdownMenuItem } from "#ui/types";
 
@@ -127,7 +128,7 @@ defineExpose({ form });
                 "
               />
 
-              <CmpTooltip v-if="!field.static && displayFields.length > 1">
+              <UTooltip v-if="!field.static && displayFields.length > 1">
                 <UButton
                   data-testid="filter-form-rm-field"
                   variant="ghost"
@@ -142,14 +143,14 @@ defineExpose({ form });
                 <template #text>
                   {{ $tt("$.info.remove_field") }}
                 </template>
-              </CmpTooltip>
+              </UTooltip>
             </template>
           </CmpField>
 
           <div class="flex flex-row gap-2">
             <!-- tlacitko pro pridani fieldu do filtru -->
             <UDropdown :items="[otherFields as DropdownMenuItem[]]">
-              <CmpTooltip>
+              <UTooltip>
                 <UButton
                   data-testid="filter-form-add-field"
                   size="xs"
@@ -160,11 +161,11 @@ defineExpose({ form });
                 />
 
                 <template #text>{{ $tt("$.info.add_fields") }}</template>
-              </CmpTooltip>
+              </UTooltip>
             </UDropdown>
 
             <!-- tlacitko pro propojeni fieldu se sloupcem -->
-            <CmpTooltip>
+            <UTooltip>
               <UToggle
                 v-model="fixModel"
                 size="lg"
@@ -172,7 +173,7 @@ defineExpose({ form });
               />
 
               <template #text>{{ $tt("$.info.fix_field_col") }}</template>
-            </CmpTooltip>
+            </UTooltip>
           </div>
         </template>
       </CmpForm>

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
-import defu from "defu";
 
 import type { IItem } from "@suku-kahanamoku/common-module/types";
 import {

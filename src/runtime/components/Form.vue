@@ -17,7 +17,6 @@ import type { IBtn } from "@suku-kahanamoku/ui-module/types";
 
 import type { IFormField, IFormFieldOption } from "../types/field.interface";
 import { useZod } from "../composables/useZod";
-import type { footer } from "#build/ui";
 
 // Definice props
 const props = defineProps<{
