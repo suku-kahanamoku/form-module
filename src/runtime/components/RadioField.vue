@@ -116,20 +116,17 @@ onMounted(async () => {
     </template>
 
     <!-- Input -->
-    <template #default="{ error }">
-      <URadioGroup
-        ref="el"
-        v-model="model"
-        :disabled="field.disabled"
-        :color="field.color"
-        :items="options"
-        :optionAttribute="field.optionAttribute || 'label'"
-        :valueAttribute="field.valueAttribute || 'value'"
-        :size="field.size || 'xl'"
-        :uiRadio="{ label: error && 'text-red-500' }"
-        :autofocus="field.autofocus"
-        :class="{ 'field-warning': isDifferent }"
-      />
-    </template>
+    <URadioGroup
+      ref="el"
+      v-model="model"
+      :disabled="field.disabled"
+      :color="field.color"
+      :items="options"
+      :optionAttribute="field.optionAttribute || 'label'"
+      :valueAttribute="field.valueAttribute || 'value'"
+      :size="field.size || 'xl'"
+      :autofocus="field.autofocus"
+      :class="{ 'field-warning': isDifferent }"
+    />
   </UFormField>
 </template>

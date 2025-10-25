@@ -17,6 +17,7 @@ import type { IBtn } from "@suku-kahanamoku/ui-module/types";
 
 import type { IFormField, IFormFieldOption } from "../types/field.interface";
 import { useZod } from "../composables/useZod";
+import type { footer } from "#build/ui";
 
 // Definice props
 const props = defineProps<{
@@ -137,7 +138,17 @@ defineExpose({ form, model, schema, onChange });
       @submit.prevent="onSubmit"
       @change="emits('change', model, $event)"
     >
-      <UCard :variant="variant" :ui="ui">
+      <UCard
+        :variant="variant || 'subtle'"
+        :ui="
+          defu(ui, {
+            body: 'space-y-4',
+            footer: `flex justify-between ${
+              actions?.no?.disabled ? 'justify-end' : ''
+            }`,
+          })
+        "
+      >
         <template v-if="$slots.header" #header>
           <slot name="header" />
         </template>
@@ -184,13 +195,17 @@ defineExpose({ form, model, schema, onChange });
         <template v-if="!actions?.disabled" #footer>
           <slot name="actions" v-bind:form="form" v-bind:model="model">
             <UButton
+              v-if="!actions?.no?.disabled"
               data-testid="form-cancel"
-              :to="localePath(actions?.no?.link!)"
+              :to="
+                actions?.no?.link ? localePath(actions?.no?.link) : undefined
+              "
               type="button"
               :color="actions?.no?.color"
-              :variant="actions?.no?.variant"
+              :variant="actions?.no?.variant || 'outline'"
               :size="actions?.no?.size"
               :icon="actions?.no?.icon"
+              :disabled="actions?.no?.disabled"
               @click="actions?.no?.link ? undefined : emits('cancel', model)"
             >
               {{ $tt(actions?.no?.label || "$.btn.cancel") }}
@@ -202,7 +217,7 @@ defineExpose({ form, model, schema, onChange });
               :to="localePath(actions?.yes?.link!)"
               type="button"
               :color="actions?.yes?.color || color"
-              :variant="actions?.yes?.variant || 'solid'"
+              :variant="actions?.yes?.variant"
               :size="actions?.yes?.size"
               :icon="actions?.yes?.icon"
               :loading="loading"
@@ -214,7 +229,7 @@ defineExpose({ form, model, schema, onChange });
               data-testid="form-submit"
               type="submit"
               :color="actions?.yes?.color || color"
-              :variant="actions?.yes?.variant || 'solid'"
+              :variant="actions?.yes?.variant"
               :size="actions?.yes?.size"
               :icon="actions?.yes?.icon"
               :disabled="

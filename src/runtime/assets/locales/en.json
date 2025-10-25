@@ -50,7 +50,8 @@
     "form": {
       "email": "E-mail",
       "password": "Password",
-      "select": "Select"
+      "select": "Select",
+      "select_date": "Select date"
     },
     "query": {
       "not_saved_changes": "Your changes have not been saved. Do you really want leave the page?"

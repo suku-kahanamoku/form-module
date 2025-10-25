@@ -24,6 +24,7 @@ export function useOperator(field: IFormField) {
     "$ne",
     "$null",
     "$not_null",
+    "$raw",
   ];
 
   const NUMBER_OPERATORS = [
@@ -77,6 +78,7 @@ export function useOperator(field: IFormField) {
     $null: "NULL",
     $not_null: "!NULL",
     $range: "RANGE",
+    $raw: "REGEX",
   };
 
   /**

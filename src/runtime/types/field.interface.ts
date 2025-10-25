@@ -181,10 +181,10 @@ export interface IFormField {
   hint?: string;
 
   /**
-   * @property {("outline" | "none")} [variant]
+   * @property {("outline")} [variant]
    * Varianta zobrazení pole.
    */
-  variant?: "outline" | "none";
+  variant?: "outline" | "solid" | "subtle" | "soft";
 
   /**
    * @property {("md" | "2xs" | "xs" | "sm" | "lg" | "xl")} [size]

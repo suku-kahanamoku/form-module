@@ -50,7 +50,8 @@
     "form": {
       "email": "E-mail",
       "password": "Heslo",
-      "select": "Vybrat"
+      "select": "Vybrat",
+      "select_date": "Vybrat datum"
     },
     "query": {
       "not_saved_changes": "Vaše změny nebyly uloženy. Opravdu chcete opustit stránku?"

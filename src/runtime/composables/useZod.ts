@@ -97,7 +97,7 @@ export function useZod() {
 
         // Kontrola minimální hodnoty
         if (IS_DEFINED(field.min)) {
-          schema = schema.refine((val: any) => {
+          schema = schema.refine((val: string) => {
             // Pokud se ma kontrolovat validace, hodnota musi byt definovana
             if (IS_DEFINED(val) && val.toString().length) {
               const num = parseFloat(val);
@@ -110,7 +110,7 @@ export function useZod() {
 
         // Kontrola maximální hodnoty
         if (IS_DEFINED(field.max)) {
-          schema = schema.refine((val: any) => {
+          schema = schema.refine((val: string) => {
             // Pokud se ma kontrolovat validace, hodnota musi byt definovana
             if (IS_DEFINED(val) && val.toString().length) {
               const num = parseFloat(val);
@@ -123,7 +123,7 @@ export function useZod() {
 
         // Kontrola poctu desetinnych mist
         if (IS_DEFINED(field.precision)) {
-          schema = schema.refine((val: number) => {
+          schema = schema.refine((val: string) => {
             // Pokud se ma kontrolovat validace, hodnota musi byt definovana
             if (IS_DEFINED(val) && val.toString().length) {
               const decimalPlaces = val?.toString()?.split(".")[1]?.length || 0;
@@ -162,13 +162,23 @@ export function useZod() {
         }
 
         // Pokud je nastaven typ souboru, kontroluje se typ souboru
-        if (IS_DEFINED(field.accept)) {
+        if (IS_DEFINED(field.fileTypes?.length)) {
           schema = schema.refine(
-            (file: any) =>
-              IS_DEFINED(file?.type) && file.type !== field.accept
-                ? false
-                : true,
-            t("$.message.invalid_file", { type: field.accept.toString() })
+            (file: File | File[]) => {
+              const types =
+                field.fileTypes.flatMap((type: any) =>
+                  Array.isArray(type.value) ? type.value : [type.value]
+                ) || [];
+              if (Array.isArray(file)) {
+                return file.every((f: File) => types.includes(f.type));
+              }
+              if (file instanceof File) {
+                return types.includes(file.type);
+              }
+            },
+            t("$.message.invalid_file", {
+              types: field.fileTypes.map((type: any) => type.label)?.join(", "),
+            })
           );
         }
 
@@ -189,7 +199,7 @@ export function useZod() {
         if (field.multiple) {
           schema = z.union([z.any().nullish(), z.any().array().nullish()]);
         } else {
-          schema = z.any().nullish();
+          schema = z.any();
         }
 
         // Pokud je pole povinne, vyzaduje minimalne jeden znak
@@ -236,7 +246,7 @@ export function useZod() {
     }
 
     // Pokud je zadana vychozi hodnota, nastavi ji
-    if (field.value !== undefined) {
+    if (field.value !== undefined && !field.required) {
       schema = schema.default(field.value);
     }
 

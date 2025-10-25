@@ -94,7 +94,9 @@ export function useField() {
   ): Record<string, any> {
     return Object.fromEntries(
       fields.map((field) => {
-        let value = model ? GET_OBJECT_PARAM(model, field.name) : field.value;
+        let value = model
+          ? GET_OBJECT_PARAM(model, field.name)
+          : decodeURIComponent(field.value || "");
         if (field?.isObjectArray) {
           if (Array.isArray(value)) {
             value = field.multiple
@@ -137,10 +139,6 @@ export function useField() {
         ?.map((option) => ({
           value: GET_OBJECT_PARAM(option, restOptions?.value || "value"),
           label: GET_OBJECT_PARAM(option, restOptions?.label || "label"),
-          description: GET_OBJECT_PARAM(
-            option,
-            restOptions?.description || "description"
-          ),
           disabled: option.disabled,
           item: option.item || option,
         }))
@@ -149,10 +147,6 @@ export function useField() {
       return {
         value: GET_OBJECT_PARAM(data, restOptions?.value || "value"),
         label: GET_OBJECT_PARAM(data, restOptions?.label || "label"),
-        description: GET_OBJECT_PARAM(
-          data,
-          restOptions?.description || "description"
-        ),
         disabled: data.disabled,
         item: data.item || data,
       };
@@ -212,6 +206,23 @@ export function useField() {
       } catch (error) {
         console.error(error);
       }
+
+      // Pokud jsou hodnoty pole, ale nejsou v options, přidáme je
+      values?.forEach((value: any) => {
+        const option = options?.find(
+          (option) =>
+            option.value ===
+            (IS_DEFINED(value) &&
+            (typeof value === "object" || Array.isArray(value))
+              ? value[restOptions?.value || "_id"]
+              : value)
+        );
+        if (!option) {
+          options?.unshift(
+            transformToOption(value, restOptions) as IFormFieldOption
+          );
+        }
+      });
     }
     return options;
   }
