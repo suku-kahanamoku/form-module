@@ -71,7 +71,6 @@ const isDifferent = computed(() => {
       ref="el"
       v-model="model"
       :default-value="field.value"
-      :type="field.type"
       :name="field.name"
       :required="field.required"
       :disabled="field.disabled"

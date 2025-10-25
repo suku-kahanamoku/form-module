@@ -7,7 +7,6 @@ import {
   hasNuxtModule,
   installModule,
 } from "@nuxt/kit";
-import defu from "defu";
 
 /**
  * @typedef {Object} ModuleOptions
