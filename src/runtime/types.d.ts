@@ -12,5 +12,11 @@ declare module "@vue/runtime-core" {
   }
 }
 
+declare module "vue" {
+  export interface ComponentCustomProperties {
+    $zod: typeof z;
+  }
+}
+
 export * from "./types/form.interface";
 export * from "./types/field.interface";
