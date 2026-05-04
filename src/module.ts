@@ -105,10 +105,5 @@ export default defineNuxtModule<ModuleOptions>({
     if (!hasNuxtModule("@suku-kahanamoku/ui-module")) {
       await installModule("@suku-kahanamoku/ui-module");
     }
-
-    // Instalace Pinia modulu, pokud není již nainstalován
-    if (!hasNuxtModule("@pinia/nuxt")) {
-      await installModule("@pinia/nuxt");
-    }
   },
 });
