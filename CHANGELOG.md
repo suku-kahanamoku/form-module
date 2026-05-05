@@ -3,6 +3,10 @@
 
 <<<<<<< HEAD
 =======
+## v1.0.18
+
+[compare changes](https://undefined/undefined/compare/v1.0.17...v1.0.18)
+
 ## v1.0.17
 
 [compare changes](https://undefined/undefined/compare/v1.0.16...v1.0.17)
