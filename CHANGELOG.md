@@ -3,6 +3,18 @@
 
 <<<<<<< HEAD
 =======
+## v1.0.16
+
+[compare changes](https://undefined/undefined/compare/v1.0.15...v1.0.16)
+
+### 🏡 Chore
+
+- Update dependencies (0bfffc4)
+
+### ❤️ Contributors
+
+- Suku <sukusovi@gmail.com>
+
 ## v1.0.15
 
 [compare changes](https://undefined/undefined/compare/v1.0.14...v1.0.15)
