@@ -2,7 +2,6 @@ import {
   useApi,
   useFactory,
   useForm,
-  useModifiedItemStore,
   useNavigable,
   useNuxtApp,
   useRoute,
@@ -40,9 +39,6 @@ export function useFormNavigable() {
   const { getUrlFieldsPayload, getFieldsPayload } = useForm();
   const navigable = useNavigable();
   const { display } = useToastify();
-
-  // Store pro pamatování naposledy upraveného záznamu
-  const modifiedStore = useModifiedItemStore();
 
   /**
    * @function onNavigate
@@ -192,9 +188,6 @@ export function useFormNavigable() {
     method?: IHttpMethod,
     config?: IFormConfig
   ): void {
-    if (config?.modelType && result?.data?._id) {
-      modifiedStore.setItem(config.modelType, method!, result.data);
-    }
     if (config && method) {
       const successMsg = config[`${method?.toLowerCase()}_success`];
       display(
@@ -259,7 +252,6 @@ export function useFormNavigable() {
     onSubmit,
     onSubmitSuccess,
     onSubmitError,
-    modifiedStore,
     ...navigable,
   };
 }
