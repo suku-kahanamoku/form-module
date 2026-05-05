@@ -53,7 +53,8 @@
       "email": "E-mail",
       "password": "Password",
       "select": "Select",
-      "select_date": "Select date"
+      "select_date": "Select date",
+      "delete_success_msg": "Record was successfully deleted."
     },
     "query": {
       "not_saved_changes": "Your changes have not been saved. Do you really want leave the page?"

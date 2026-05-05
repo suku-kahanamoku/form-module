@@ -53,7 +53,8 @@
       "email": "E-mail",
       "password": "Heslo",
       "select": "Vybrat",
-      "select_date": "Vybrat datum"
+      "select_date": "Vybrat datum",
+      "delete_success_msg": "Záznam byl úspěšně smazán."
     },
     "query": {
       "not_saved_changes": "Vaše změny nebyly uloženy. Opravdu chcete opustit stránku?"
