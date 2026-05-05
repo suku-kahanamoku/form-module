@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { UTooltip } from "#components";
-import { ref, reactive, useOperator } from "#imports";
+import { ref, reactive } from "vue";
+import { useOperator } from "#imports";
 import type { DropdownMenuItem } from "#ui/types";
 
 import type { IFormField, IFormFieldOption } from "../types/field.interface";

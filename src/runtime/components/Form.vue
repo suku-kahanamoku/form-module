@@ -1,12 +1,6 @@
 <script setup lang="ts">
-import {
-  ref,
-  computed,
-  reactive,
-  useField,
-  triggerRef,
-  useLocalePath,
-} from "#imports";
+import { ref, computed, reactive, triggerRef } from "vue";
+import { useField, useLocalePath } from "#imports";
 import type { ButtonProps, CardProps } from "#ui/types";
 import { z } from "zod";
 import defu from "defu";

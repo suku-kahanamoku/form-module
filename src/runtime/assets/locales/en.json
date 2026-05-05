@@ -33,9 +33,11 @@
       "delete_error": "Can not delete \"{name}\".",
       "not_found": "No record found.",
       "401_error": "You do not have the permission.",
+      "403_error": "You do not have permission to perform this action.",
       "403_post_error": "You do not have permission to create a record.",
       "403_patch_error": "You do not have permission to update a record.",
-      "403_delete_error": "You do not have permission to delete \"{name}\"."
+      "403_delete_error": "You do not have permission to delete \"{name}\".",
+      "default_error": "An unexpected error occurred for record \"{name}\"."
     },
     "info": {
       "created_item": "Created record",

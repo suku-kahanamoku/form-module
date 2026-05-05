@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
-import { useApi, onMounted, type Ref } from "#imports";
+import { onMounted, type Ref } from "vue";
+import { useApi } from "#imports";
 
 import type { IItem } from "@suku-kahanamoku/common-module/types";
 import { GET_OBJECT_PARAM } from "@suku-kahanamoku/common-module/utils";

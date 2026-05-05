@@ -33,9 +33,11 @@
       "delete_error": "Nelze smazat záznam \"{name}\".",
       "not_found": "Nenalezen žádný záznam.",
       "401_error": "Nedostatečné oprávnění.",
+      "403_error": "Nemáte oprávnění k provedení této akce.",
       "403_post_error": "Nemáte oprávnění vytvovářet záznamy.",
       "403_patch_error": "Nemáte oprávnění upravovat záznamy.",
-      "403_delete_error": "Nemáte oprávnění k odstranění \"{name}\"."
+      "403_delete_error": "Nemáte oprávnění k odstranění \"{name}\".",
+      "default_error": "Nastala neočekávaná chyba u záznamu \"{name}\"."
     },
     "info": {
       "created_item": "Nový záznam",
