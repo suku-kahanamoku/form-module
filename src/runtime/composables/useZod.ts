@@ -86,7 +86,19 @@ export function useZod() {
         break;
 
       case "number":
-        schema = z.union([z.number(), z.literal("")]);
+        // z.preprocess converts string numbers to actual numbers before validation.
+        // UInput[type="number"] passes values as strings from the DOM.
+        // Supports both "." and "," as decimal separators (e.g. Czech locale "299,22").
+        schema = z.preprocess(
+          (val) => {
+            if (typeof val === "string" && val !== "") {
+              const n = parseFloat(val.replace(",", "."));
+              return isNaN(n) ? val : n;
+            }
+            return val;
+          },
+          z.union([z.number(), z.literal("")])
+        );
 
         // Pokud je pole povinne, kontroluje zda neni undefined
         if (field.required) {

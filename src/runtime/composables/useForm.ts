@@ -59,11 +59,11 @@ export function useForm() {
           } else {
             // pokud je to objekt, vrati id
             if (IS_OBJECT(modelValue[0])) {
-              modelValue = modelValue.map((i) => i._id);
+              modelValue = modelValue.map((i) => i.id);
             }
             // pokud je to objekt, vrati id
             if (IS_OBJECT(parsedValue[0])) {
-              parsedValue = parsedValue.map((i) => i._id);
+              parsedValue = parsedValue.map((i) => i.id);
             }
           }
           // pokud v poli existuje rozdil do resultu vlozi atribut s novymi daty

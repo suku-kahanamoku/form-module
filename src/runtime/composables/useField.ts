@@ -58,7 +58,7 @@ export function useField() {
         return !!DIFFERENCE(
           Array.isArray(defValue)
             ? defValue?.map((record: IItem) =>
-                GET_OBJECT_PARAM(record, field.restoptions?.value || "_id")
+                GET_OBJECT_PARAM(record, field.restoptions?.value || "id")
               )
             : [],
           newValue || []
@@ -102,7 +102,7 @@ export function useField() {
             value = field.multiple
               ? value
                   ?.map((i: IItem) =>
-                    GET_OBJECT_PARAM(i, field.restOptions?.value || "_id")
+                    GET_OBJECT_PARAM(i, field.restOptions?.value || "id")
                   )
                   .filter(Boolean)
               : value?.filter(Boolean)?.join(", ");
@@ -208,13 +208,14 @@ export function useField() {
       }
 
       // Pokud jsou hodnoty pole, ale nejsou v options, přidáme je
-      values?.forEach((value: any) => {
+      const valuesArr = Array.isArray(values) ? values : IS_DEFINED(values) ? [values] : [];
+      valuesArr.forEach((value: any) => {
         const option = options?.find(
           (option) =>
             option.value ===
             (IS_DEFINED(value) &&
             (typeof value === "object" || Array.isArray(value))
-              ? value[restOptions?.value || "_id"]
+              ? value[restOptions?.value || "id"]
               : value)
         );
         if (!option) {
@@ -303,7 +304,7 @@ export function useField() {
           field.isObjectArray
             ? GET_OBJECT_PARAM(
                 i,
-                field.restOptions?.label || field.restOptions?.value || "_id"
+                field.restOptions?.label || field.restOptions?.value || "id"
               )
             : i,
           field,
