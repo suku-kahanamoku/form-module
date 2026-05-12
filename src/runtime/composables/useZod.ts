@@ -147,20 +147,21 @@ export function useZod() {
         }
         break;
 
-      case "checkbox":
-        // Definuje schemu jako boolean
-        schema = z.union([z.boolean().nullish(), z.literal("")]);
+      case "checkbox": {
+        // Definuje schemu jako boolean (akceptuje i 0/1 z backendu)
+        const boolSchema = z.union([z.boolean(), z.number(), z.literal(""), z.null(), z.undefined()]).transform((val) => !!val);
 
         // Pokud je pole povinne, kontroluje zda je true
         if (field.required) {
-          schema = schema.refine(
+          schema = boolSchema.refine(
             (val: boolean) => val === true,
             t("$.message.required")
           );
         } else {
-          schema = schema.nullish();
+          schema = boolSchema;
         }
         break;
+      }
 
       case "file":
         // Definuje schemu jako instance souboru
