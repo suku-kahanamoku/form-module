@@ -190,7 +190,7 @@ onMounted(loadOptions);
       :color="field.color"
       :variant="field.variant"
       :size="field.size || 'xl'"
-      :placeholder="field.placeholder || '$.form.select'"
+      :placeholder="$tt(field.placeholder || '$.form.select')"
       :trailingIcon="
         open ? 'i-heroicons-chevron-down' : 'i-heroicons-chevron-right'
       "
