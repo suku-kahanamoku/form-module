@@ -31,6 +31,7 @@ const el = ref();
 
 // Model pro hodnotu textoveho pole (podporuje bool i 1/0)
 const model = defineModel<boolean | number>({
+  get: (val) => !!val,
   set: (val) => !!val,
 });
 
