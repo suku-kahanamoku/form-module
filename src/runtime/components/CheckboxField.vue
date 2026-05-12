@@ -29,14 +29,20 @@ const { compare } = useField();
 // Ui cmp element
 const el = ref();
 
-// Model pro hodnotu textoveho pole
-const model = defineModel<boolean>();
+// Model pro hodnotu textoveho pole (podporuje bool i 1/0)
+const model = defineModel<boolean | number>({
+  set: (val) => !!val,
+});
 
 // Zjisti zda puvodni hodnota a hodnota v input fieldu jsou rozdilne
 const isDifferent = computed(() => {
   if (props.item && IS_DEFINED(model.value)) {
     const value = GET_OBJECT_PARAM(props.item, props.field.name);
-    return compare(IS_DEFINED(value) ? value : false, model.value, props.field);
+    return compare(
+      IS_DEFINED(value) ? !!value : false,
+      !!model.value,
+      props.field,
+    );
   }
 });
 </script>
