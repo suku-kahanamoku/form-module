@@ -3,6 +3,18 @@
 
 <<<<<<< HEAD
 =======
+## v1.0.26
+
+[compare changes](https://undefined/undefined/compare/v1.0.25...v1.0.26)
+
+### 🩹 Fixes
+
+- **checkbox:** Add get transformer to coerce 0/1 to boolean (4df1dc8)
+
+### ❤️ Contributors
+
+- Suku <sukusovi@gmail.com>
+
 ## v1.0.23
 
 [compare changes](https://undefined/undefined/compare/v1.0.22...v1.0.23)
