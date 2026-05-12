@@ -3,6 +3,18 @@
 
 <<<<<<< HEAD
 =======
+## v1.0.28
+
+[compare changes](https://undefined/undefined/compare/v1.0.27...v1.0.28)
+
+### 🩹 Fixes
+
+- **select:** Translate placeholder via $tt (b981600)
+
+### ❤️ Contributors
+
+- Suku <sukusovi@gmail.com>
+
 ## v1.0.27
 
 [compare changes](https://undefined/undefined/compare/v1.0.26...v1.0.27)
