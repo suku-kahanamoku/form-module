@@ -3,6 +3,18 @@
 
 <<<<<<< HEAD
 =======
+## v1.0.27
+
+[compare changes](https://undefined/undefined/compare/v1.0.26...v1.0.27)
+
+### 🩹 Fixes
+
+- **checkbox:** Accept 0/1 integers in zod schema (d87c27b)
+
+### ❤️ Contributors
+
+- Suku <sukusovi@gmail.com>
+
 ## v1.0.26
 
 [compare changes](https://undefined/undefined/compare/v1.0.25...v1.0.26)
