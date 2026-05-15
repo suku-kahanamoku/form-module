@@ -158,6 +158,7 @@ defineExpose({ form, model, schema, onChange });
             v-bind:field="field"
             v-bind:model="model"
           >
+            <div :class="{ hidden: field.type === 'hidden' }">
             <CmpField
               v-model="model[field.name]"
               :field="field"
@@ -182,6 +183,7 @@ defineExpose({ form, model, schema, onChange });
                   emits('click:badge', model, value, _field, options)
               "
             />
+            </div>
           </slot>
         </template>
 
