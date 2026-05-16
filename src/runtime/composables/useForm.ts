@@ -147,6 +147,15 @@ export function useForm() {
 
     const operator = field?.operator?.value;
 
+    // Skip empty values unless operator explicitly targets null/not-null
+    if (
+      operator !== "$null" &&
+      operator !== "$not_null" &&
+      (value === "" || value === null || (Array.isArray(value) && value.length === 0))
+    ) {
+      return "";
+    }
+
     switch (operator) {
       case "$null":
       case "$not_null":

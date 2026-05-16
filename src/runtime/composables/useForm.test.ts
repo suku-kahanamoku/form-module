@@ -247,7 +247,7 @@ describe("useForm", () => {
       const form = { field10: "" };
       const fields: IFormField[] = [{ name: "field10" }];
       const result = getUrlFieldsPayload(form, fields);
-      expect(result).toBe('"field10":{"value":""}');
+      expect(result).toBe(""); // empty string is not sent
     });
 
     it("should handle ignored fields", () => {
@@ -312,8 +312,8 @@ describe("useForm", () => {
       expect(result).toBe(
         '"field3":{"value":"string"},' +
           '"field4":{"value":100},"field5":{"value":false},' +
-          '"field6":{"value":["array"]},' +
-          '"field7":{"value":""}'
+          '"field6":{"value":["array"]}'
+        // field7 is null → excluded
       );
     });
 
@@ -321,7 +321,7 @@ describe("useForm", () => {
       const form = { field10: "   " };
       const fields: IFormField[] = [{ name: "field10" }];
       const result = getUrlFieldsPayload(form, fields);
-      expect(result).toBe('"field10":{"value":""}');
+      expect(result).toBe(""); // whitespace-only is trimmed to empty → not sent
     });
 
     it("should handle null form input gracefully", () => {
