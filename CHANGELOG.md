@@ -3,6 +3,18 @@
 
 <<<<<<< HEAD
 =======
+## v1.0.30
+
+[compare changes](https://undefined/undefined/compare/v1.0.29...v1.0.30)
+
+### 🩹 Fixes
+
+- Skip empty/null/whitespace fields in getUrlFieldsPayload (dfd77ec)
+
+### ❤️ Contributors
+
+- Suku <sukusovi@gmail.com>
+
 ## v1.0.28
 
 [compare changes](https://undefined/undefined/compare/v1.0.27...v1.0.28)
